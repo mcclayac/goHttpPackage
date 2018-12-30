@@ -14,9 +14,9 @@ Fprintf formats according to a format specifier and writes to w. It
 returns the number of bytes written and any write error encountered.
 */
 
-
-func poemHandler(w http.ResponseWriter, r *http.Request)  {
+func poemHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
+
 	poemName := r.Form["name"][0]
 	//fileName := "doggie.txt"
 	p, err := poetry.LoadPoem(poemName)
@@ -28,19 +28,16 @@ func poemHandler(w http.ResponseWriter, r *http.Request)  {
 		return
 	}
 
-	_, err = fmt.Fprintf(w, "Poem Name: %s \n\n%s\n\n",poemName, p)
+	_, err = fmt.Fprintf(w, "Poem Name: %s \n\n%s\n\n", poemName, p)
 
 	if err != nil {
 		fmt.Printf("An Error occured reading file %s \n", poemName)
 		os.Exit(-1)
 	}
 
-
 }
 
-
 func main() {
-
 
 	/*fileName := "doggie.txt"
 	p, err := poetry.LoadPoem(fileName)
@@ -51,9 +48,9 @@ func main() {
 	}
 
 	fmt.Printf("%s\n", p)
-*/
+	*/
 
-	http.HandleFunc("/poem", poemHandler )
+	http.HandleFunc("/poem", poemHandler)
 	http.ListenAndServe(":8088", nil)
 
 }
